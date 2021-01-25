@@ -1,0 +1,17 @@
+# Compose file for a Alastria-T node
+
+version: "3.7"
+services:
+  alastria-node:
+    build: ./alastria-node
+    container_name: ${NODE_NAME}
+    volumes:
+      - "./alastria-node-data:/root/alastria"
+    ports:
+      - "21000:21000/tcp"
+      - "21000:21000/udp"
+#     - "22000:22000/tcp"
+    environment:
+      - NODE_TYPE=${NODE_TYPE}
+      - NODE_NAME=${NODE_NAME}
+      - NODE_BRANCH=${NODE_BRANCH}
