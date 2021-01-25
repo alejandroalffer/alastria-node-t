@@ -5,14 +5,15 @@
 FROM ubuntu:18.04 AS builder
 
 # Define the version of Golang compiler
-# ARG GOLANG_VERSION="go1.9.5.linux-amd64.tar.gz"
-ARG GOLANG_VERSION="go1.15.2.linux-amd64.tar.gz"
+ARG GOLANG_VERSION="go1.9.5.linux-amd64.tar.gz"
+# ARG GOLANG_VERSION="go1.15.2.linux-amd64.tar.gz"
 
 # Define the Quorum version to use
+ARG QUORUM_VERSION=v2.2.3
 # ARG QUORUM_VERSION=v2.2.4
 # ARG QUORUM_VERSION=v2.2.5
 # ARG QUORUM_VERSION=v2.6.0
-ARG QUORUM_VERSION=v2.7.0
+# ARG QUORUM_VERSION=v2.7.0
 # ARG QUORUM_VERSION=v20.10.0
 
 # Install basic dependencies and tools

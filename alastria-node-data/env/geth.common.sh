@@ -3,15 +3,6 @@ NETID="83584648538"
 # The P2P network listening port
 P2P_PORT="21000"
 
-# Enable the JSON-RPC server, setting this to "--rpc"
-ENABLE_RPC="--rpc"
-# The JSON-RPC network listening address. Only allow local calls
-RPCADDR="127.0.0.0"
-# The port to use for JSONRPC
-RPCPORT="22000"
-# Allowed protocols via JSON-RPC
-RPCAPI="admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul"
-
 # The timeout for the IBFT protocol execution (inactivity of the proposer)
 ISTANBUL_REQUESTTIMEOUT="10000"
 
@@ -27,6 +18,19 @@ TARGETGASLIMIT="8000000"
 VERBOSITY="3"
 # Per-module verbosity: comma-separated list of <pattern>=<level> (e.g. eth/*=5,p2p=4)
 VMODULE="consensus/istanbul/core/core.go=5"
+
+################################################
+# CONSIDER EDITING FROM HERE
+################################################
+
+# Enable the JSON-RPC server, setting this to "--rpc"
+ENABLE_RPC="--rpc"
+# The JSON-RPC network listening address. Only allow local calls
+RPCADDR="127.0.0.0"
+# The port to use for JSONRPC
+RPCPORT="22000"
+# Allowed protocols via JSON-RPC
+RPCAPI="admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul"
 
 # Geth arguments
 GLOBAL_ARGS="--networkid $NETID \
@@ -50,10 +54,10 @@ $ENABLE_RPC \
 NETSTATS_METRICS=" --ethstats $NODE_NAME:bb98a0b6442386d0cdf8a31b267892c1@netstats.telsius.alastria.io:80"
 
 # Influx
-# INFLUX_METRICS=" --metrics --metrics.influxdb --metrics.influxdb.endpoint http://geth-metrics.planisys.net:8086 --metrics.influxdb.database alastria --metrics.influxdb.username alastriausr --metrics.influxdb.password ala0str1AX1 --metrics.influxdb.host.tag=${NODE_NAME}"
+INFLUX_METRICS=" --metrics --metrics.influxdb --metrics.influxdb.endpoint http://geth-metrics.planisys.net:8086 --metrics.influxdb.database alastria --metrics.influxdb.username alastriausr --metrics.influxdb.password ala0str1AX1 --metrics.influxdb.host.tag=${NODE_NAME}"
 
 # Influx && geth > 1.9
-INFLUX_METRICS=" --metrics --metrics.expensive  --pprof --pprofaddr 0.0.0.0 --pprofport 9545 --metrics.influxdb --metrics.influxdb.endpoint http://geth-metrics.planisys.net:8086 --metrics.influxdb.database alastria --metrics.influxdb.username alastriausr --metrics.influxdb.password ala0str1AX1 --metrics.influxdb.tags host=${NODE_NAME}"
+# INFLUX_METRICS=" --metrics --metrics.expensive  --pprof --pprofaddr 0.0.0.0 --pprofport 9545 --metrics.influxdb --metrics.influxdb.endpoint http://geth-metrics.planisys.net:8086 --metrics.influxdb.database alastria --metrics.influxdb.username alastriausr --metrics.influxdb.password ala0str1AX1 --metrics.influxdb.tags host=${NODE_NAME}"
 
 # Any additional arguments
 LOCAL_ARGS=""
