@@ -1,9 +1,9 @@
 # Alastria Node for Alastria-T Network
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/alastria/alastria-node/blob/testnet2/LICENSE)
-[![Slack Status](https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack&style=social)](https://alastria.slack.com/)
+[![Slack Status](https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack)](https://alastria.slack.com/)
 
-Based in Jesús Ruiz develop, jesus@alastria.com
+Based on the Jesús Ruiz develop, [RedTValidatorNode](https://github.com/hesusruiz/RedTValidatorNode)
 
 ## Configuration & Installation: Quick Guide
 
@@ -17,10 +17,10 @@ Based in Jesús Ruiz develop, jesus@alastria.com
 
     > `TYPE_COMPANY_T_Y_Z_NN`
 
-    Where _TYPE_ is the rol for the node in the network, _XX_ is your company/entity name, Y is the number of processors of the machine, Z is the amount of memory in Gb and NN is a sequential counter for each machine that you may have (starting at 00). For example:
+    Where _TYPE_ is the rol for the node in the network (use `REG` for regular/general nodes), _XX_ is your company/entity name, Y is the number of processors of the machine, Z is the amount of memory in Gb and NN is a sequential counter for each machine that you may have (starting at 00). For example:
 
-    > `NODE_NAME="VAL_IN2_T_2_8_00"`
-    > `NODE_NAME="BOT_DigitelTS_T_2_8_00"`
+    > `NODE_NAME="REG_IN2_T_2_8_00"`
+    > `NODE_NAME="REG_DigitelTS_T_2_8_00"`
 
     This is the name that will appear in the public listings of nodes of the network. It does not have any other usage.
 
@@ -64,6 +64,7 @@ $ curl https://ifconfig.me/
     >+ **YOUR_IP** is the external IP of your node
 
 * With that value, create a pull request to request permission, adding the line to the node list.
+
 * When the pull request is accepted, you will see that your node starts connecting to its peers and starts synchronizing the blockchain. The process of synchronization can take hours or even one or two days depending on the speed of your network and machine.
 ## Maintaining Node
 
@@ -107,11 +108,6 @@ $ docker exec -it <container_name> /bin/bash
 Some useful commands:
 
 ```console
-$ docker ps -a
-$ docker exec -it <container_name> /bin/bash
-```
-
-```console
 root@62369c8b018e:/usr/local/bin# geth attach /root/alastria/data/geth.ipc
 Welcome to the Geth JavaScript console!
 
@@ -125,7 +121,7 @@ at block: 60568501 (Mon, 25 Jan 2021 21:37:51 UTC)
 > admin.peers
 > admin.nodeInfo
 > personal.unlockAccount(eth.accounts[0],"_your_eth0_password_",2000)
-eth.sendTransaction({from: eth.accounts[0], to: eth.accounts[0], value:0 })
+> eth.sendTransaction({from: eth.accounts[0], to: eth.accounts[0], value:0 })
 > eth.syncing
 > eth.mining
 ```
@@ -153,7 +149,7 @@ The following ports must be open, at least, to the nodes defined in the `/root/a
 | 21000| TCP/UDP | Geth process application port (inbound and outbound for ethereum traffic) |
 | 53 | TCP/UDP | Access to external Internet based resolvers |
 
-`tcp/21000` port its mandatory, as is the common standar for the Red-T network 
+`tcp/21000` and `udp/21000`port are mandatory, as is the common standard for the Red-T network.
 ## System ports (OUTPUT)
 
 We strongly advise not to filter outgoing ports. If necessary, these are the destinations
@@ -162,7 +158,6 @@ We strongly advise not to filter outgoing ports. If necessary, these are the des
 |:------:|:-----:|:---------- |
 | 80 | TCP | Outbound for Websockets feed to netstats server |
 | 8086 | TCP | Outbound for InfluxDB statistics collection |
-
 
 ## Mandatory parametres
 
@@ -187,10 +182,17 @@ To use your node through web3 applications, some connection method must be enabl
 
 TBD
 
+## Parameters for Boot Nodes
+
+TBD
+
+## Parameters for Validator Nodes
+
+TBD
+
 ## Other Resources
 
-* **WIKI**
-+ [Home](https://github.com/alastria/alastria-node/wiki)
++ [Wiki](https://github.com/alastria/alastria-node/wiki)
 + [FAQ ES](https://github.com/alastria/alastria-node/wiki/FAQ_ES)
 + [FAQ EN](https://github.com/alastria/alastria-node/wiki/FAQ_EN)
 
