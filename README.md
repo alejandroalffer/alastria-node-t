@@ -18,11 +18,11 @@ In Alastria-T network there are 3 types of nodes.
 * Bootnodes: They are responsible for the permission of the nodes in the network.
 * Regular: They are responsible for accepting transactions, verifying them and delivering them to the “validator”. These kind of nodes are use for the interaction from `web3` and `Smart Contracts`, and should be the option for deploy uses cases of Blockchain. 
 
-The following process explain the instalation for a Regular (also called _general_) nodes:
+The following process explain the installation for a Regular (also called _general_) nodes:
 
 * Clone or download this repository to the machine where you want to install and operate the Red T node and enter into the cloned directory.
 
-* Edit the file `.env` and modify the lines with:
+* :fire: Edit the `.env`  file and modify the lines with:
 
 >+ NODE_TYPE if your not sure what option its need, select _general_
 >+ NODE_NAME attribute according to the name you want for this node. The name SHOULD follow the convention:
@@ -35,6 +35,8 @@ Where _TYPE_ is the rol for the node in the network (use `REG` for regular/gener
 >+ `NODE_NAME="REG_DigitelTS_T_2_8_00"`
 
 This is the name that will appear in the public listings of nodes of the network. It does not have any other usage.
+
+* :fire: Edit the `docker-compose.yml` file, and make your own changes.
 
 * In the root directory of the repository (where the file `docker-compose.yml` exists) run:
 
@@ -169,7 +171,7 @@ If the transaction appears in [Alastria-T Network explorer](https://blkexplorer1
 
 The following items should be backed up:
 
->+ `/root/alastria/data/geth/nodekey`: This file contains the cryptographic information for joying the network. This file can be restored to start over a new instalation without restarting the permissioning  process.
+>+ `/root/alastria/data/geth/nodekey`: This file contains the cryptographic information for joying the network. This file can be restored to start over a new installation without restarting the permissioning  process.
 >+ ` /root/alastria/data/keystore/`: This directory contains local accounts created from the node.
 
 ## Resetting DLT
