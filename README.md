@@ -11,6 +11,14 @@ Based on the work of:
 
 ## Configuration & Installation: Quick Guide for docker-compose
 
+In Alastria T-network there are 3 types of nodes.
+
+* Validators: They are in charge of the mining and validation of the blocks using the IBFT consensus algorithm.
+* Bootnodes: They are responsible for the permission of the nodes in the network.
+* Regular: They are responsible for accepting transactions, verifying them and delivering them to the “validator”. These kind of nodes are use for the interaction from `web3` and `Smart Contracts`, and should be the option for deploy uses cases of Blockchain. 
+
+The following process explain the instalation for a Regular (also called _general_) nodes:
+
 * Clone or download this repository to the machine where you want to install and operate the Red T node and enter into the cloned directory.
 
 * Edit the file `.env` and modify the lines with:
@@ -39,8 +47,8 @@ $ docker-compose up -d
 ```console
 $ docker-compose logs -f --tail=20
 ```
-  * **You're done!** 
-## Performing Permisioned
+  * **You're done!** :sunglasses: :dancer: :v: :beers: 
+## Performing permissioned
 
 You should see the node initializing and starting to try to contact peers. However, the node is not yet permissioned, so it can not participate in the blockchain network yet.
 
@@ -67,12 +75,25 @@ $ curl https://ifconfig.me/
     >+ **YOUR_ENODE** is the value of the ENODE_ADDRESS file
     >+ **YOUR_IP** is the external IP of your node
 
-* With that value, create a pull request to request permission, adding the line to the node list. You can access to this Alastria form, https://portal.r2docuo.com/alastria/forms/noderequest, to perform administrative permision.
+* With that value, create a pull request to request permission, adding the line to the node list. You can access to this Alastria form, https://portal.r2docuo.com/alastria/forms/noderequest, to perform administrative permission:
+
+
+The corresponding repository is alastria-node and the branch will be testnet2.
+
+The files to be modified will be:
+
+> `DIRECTORY_REGULAR.md`: you should include your node name, and the enode and IP direction.
+> `data/regular-nodes.json`: you should include the enode and IP direction.
 
 * When the pull request is accepted, you will see that your node starts connecting to its peers and starts synchronizing the blockchain. The process of synchronization can take hours or even one or two days depending on the speed of your network and machine.
-## Maintaining Node
 
-You can use the standard docker-compose commands to manage your node. For example, to stop the node:
+Now it's time to start knowing more about `geth`and `goquorum`:
+* https://geth.ethereum.org/docs/interface/command-line-options
+* https://docs.goquorum.consensys.net/en/stable/
+* https://github.com/ConsenSys/quorum 
+## Maintaining the Node
+
+You can use the standard docker-compose commands to manage your node. For example:
 
 * Stop node:
   
@@ -121,6 +142,10 @@ at block: 60568501 (Mon, 25 Jan 2021 21:37:51 UTC)
  datadir: /root/alastria/data
  modules: admin:1.0 debug:1.0 eth:1.0 istanbul:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
 
+> personal.newAccount()
+Passphrase:
+Repeat passphrase:
+"0x1234..."
 > admin.peers
 > admin.nodeInfo
 > eth.blockNumber
@@ -139,10 +164,23 @@ true
 "0x1234..."
 ```
 
-If the transaccion apears in [Alastria T-Network explorer](https://blkexplorer1.telsius.alastria.io/blocks), the node its working correctly.
+If the transaction appears in [Alastria T-Network explorer](https://blkexplorer1.telsius.alastria.io/blocks), the node its working correctly.
 ## Backup
 
-The following files should be 
+The following items should be backed up:
+
+> `/root/alastria/data/geth/nodekey`: This file contains the cryptographic information for joying the network. This file can be restored to start over a new instalation without restarting the permissioning  process.
+> ` /root/alastria/data/keystore/`: This directory contains local accounts created from the node.
+
+## Resetting DLT
+
+```console:
+> cp /root/alastria/data/geth/nodekey <enode-backup>
+> geth removedb_DONOTACCIDENTALY --datadir /root/alastria/data
+> geth --datadir /root/alastria/data init /root/genesis.json
+> cp <enode-backup> /root/alastria/data/geth/nodekey
+> restart-node
+```
 
 ## System requirements
 
@@ -152,7 +190,7 @@ The following files should be
 | Memory | 4Gb |  8Gb |
 | Hard Disk | 128 Gb |  256 Gb |
 
-DLT database grows 1Gb/week: keep in mind for future updates.
+DLT database grows 1Gb/week: keep in mind for future updates. SSD disc its also mandatory.
 
 ## System ports (INPUT)
 
