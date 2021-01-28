@@ -177,17 +177,17 @@ The following items should be backed up:
 ## Resetting DLT
 
 ```console:
-> cp /root/alastria/data/geth/nodekey <enode-backup>
-> geth removedb_DONOTACCIDENTALY --datadir /root/alastria/data
-> geth --datadir /root/alastria/data init /root/genesis.json
-> cp <enode-backup> /root/alastria/data/geth/nodekey
-> restart-node
+$ cp /root/alastria/data/geth/nodekey <enode-backup>
+$ geth removedb_DONOTACCIDENTALY --datadir /root/alastria/data
+$ geth --datadir /root/alastria/data init /root/genesis.json
+$ cp <enode-backup> /root/alastria/data/geth/nodekey
+$ (restart-container)
 ```
 
 ## System requirements
 
 | Hardware | minimum | desired |
-|:------- |:-------- |:---------|
+|--- |--- |--- |
 | CPU's | 2 |  4 |
 | Memory | 4Gb |  8Gb |
 | Hard Disk | 128 Gb |  256 Gb |
@@ -199,7 +199,7 @@ DLT database grows 1Gb/week: keep in mind for future updates. SSD disc its also 
 The following ports must be open, at least, to the nodes defined in the `/root/alastria/data/static-nodes.json` and `/root/alastria/data/permissioned-nodes.json` files. We recommend that these ports be universally open: the `whisper protocol` defined in `geth`/`GoQuorum` is robust enough to be published without the need for control through the firewall.
 
 | Port | Type | Definition |
-|:------:|:-----:|:---------- |
+|--- |--- |--- |
 | 21000| TCP/UDP | Geth process application port (inbound and outbound for ethereum traffic) |
 | 53 | TCP/UDP | Access to external Internet based resolvers |
 
@@ -209,7 +209,7 @@ The following ports must be open, at least, to the nodes defined in the `/root/a
 We strongly advise not to filter outgoing ports. If necessary, these are the destinations
 
 | Port | Type | Definition |
-|:------:|:-----:|:---------- |
+|--- |--- |--- |
 | 80 | TCP | Outbound for Websockets feed to netstats server |
 | 8086 | TCP | Outbound for InfluxDB statistics collection |
 
@@ -301,7 +301,7 @@ NODE_ARGS=" --maxpeers 100 --mine --minerthreads $(grep -c "processor" /proc/cpu
 * **Resources**
 
 | URL | Managed by | Notes|
-|:---- |:---- |:----|
+|--- |--- |--- |
 | [http://netstats.telsius.alastria.io](http://netstats.telsius.alastria.io/) | Planisys | |
 | [https://alastria-netstats2.planisys.net/snapshot/index.html](https://alastria-netstats2.planisys.net/snapshot/index.html) | Planisys | This is generated through Netstats API |
 | [https://blkexplorer1.telsius.alastria.io](https://blkexplorer1.telsius.alastria.io) | CouncilBox | |
