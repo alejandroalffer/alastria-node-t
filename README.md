@@ -9,6 +9,7 @@ Based on the work of:
 * Alfonso de la Rocha, https://github.com/adlrocha
 * ... and many other contributors to the Alastria ecosystem
 
+Alastria-T Network is a `GoQuorum` network that uses the IBFT consensus algorithm 
 ## Configuration & Installation: Quick Guide for docker-compose
 
 In Alastria-T network there are 3 types of nodes.
@@ -23,17 +24,17 @@ The following process explain the instalation for a Regular (also called _genera
 
 * Edit the file `.env` and modify the lines with:
 
-    + NODE_TYPE if your not sure what option its need, select _general_
-    + NODE_NAME attribute according to the name you want for this node. The name SHOULD follow the convention:
+>+ NODE_TYPE if your not sure what option its need, select _general_
+>+ NODE_NAME attribute according to the name you want for this node. The name SHOULD follow the convention:
 
-    > `TYPE_COMPANY_T_Y_Z_NN`
+> `TYPE_COMPANY_T_Y_Z_NN`
 
-    Where _TYPE_ is the rol for the node in the network (use `REG` for regular/general nodes), _XX_ is your company/entity name, Y is the number of processors of the machine, Z is the amount of memory in Gb and NN is a sequential counter for each machine that you may have (starting at 00). For example:
+Where _TYPE_ is the rol for the node in the network (use `REG` for regular/general nodes), _XX_ is your company/entity name, Y is the number of processors of the machine, Z is the amount of memory in Gb and NN is a sequential counter for each machine that you may have (starting at 00). For example:
 
-    > `NODE_NAME="REG_IN2_T_2_8_00"`
-    > `NODE_NAME="REG_DigitelTS_T_2_8_00"`
+>+ `NODE_NAME="REG_IN2_T_2_8_00"`
+>+ `NODE_NAME="REG_DigitelTS_T_2_8_00"`
 
-    This is the name that will appear in the public listings of nodes of the network. It does not have any other usage.
+This is the name that will appear in the public listings of nodes of the network. It does not have any other usage.
 
 * In the root directory of the repository (where the file `docker-compose.yml` exists) run:
 
@@ -53,7 +54,7 @@ You should see the node initializing and starting to try to contact peers. Howev
 
 In order to perform permissioning, follow these steps:
 
-  * Display the contents of the ENODE_ADDRESS file (the actual contents of your file will be different than in the example):
+* Display the contents of the ENODE_ADDRESS file (the actual contents of your file will be different than in the example):
 
 ```console
 $ docker exec -it REG_ExampleOrg_T_2_8_00 geth --exec "admin.nodeInfo.enode" attach /root/alastria/data/geth.ipc
@@ -67,12 +68,12 @@ $ curl https://ifconfig.me/
 
 * Create the full enode address like:
 
-    `enode://YOUR_ENODE@YOUR_IP:21000?discport=0`
+ `enode://YOUR_ENODE@YOUR_IP:21000?discport=0`
 
-    where
+ where
 
-    >+ **YOUR_ENODE** is the value of the ENODE_ADDRESS file
-    >+ **YOUR_IP** is the external IP of your node
+ >+ **YOUR_ENODE** is the value of the ENODE_ADDRESS file
+ >+ **YOUR_IP** is the external IP of your node
 
 * With that value, create a pull request to request permission, adding the line to the node list. You can access to this Alastria form, https://portal.r2docuo.com/alastria/forms/noderequest, to perform administrative permission:
 
@@ -81,8 +82,8 @@ The corresponding repository is alastria-node and the branch will be testnet2.
 
 The files to be modified will be:
 
-> `DIRECTORY_REGULAR.md`: you should include your node name, and the enode and IP direction.
-> `data/regular-nodes.json`: you should include the enode and IP direction.
+>+ `DIRECTORY_REGULAR.md`: you should include your node name, and the enode and IP direction.
+>+ `data/regular-nodes.json`: you should include the enode and IP direction.
 
 * When the pull request is accepted, you will see that your node starts connecting to its peers and starts synchronizing the blockchain. The process of synchronization can take hours or even one or two days depending on the speed of your network and machine.
 
@@ -168,8 +169,8 @@ If the transaction appears in [Alastria-T Network explorer](https://blkexplorer1
 
 The following items should be backed up:
 
-> `/root/alastria/data/geth/nodekey`: This file contains the cryptographic information for joying the network. This file can be restored to start over a new instalation without restarting the permissioning  process.
-> ` /root/alastria/data/keystore/`: This directory contains local accounts created from the node.
+>+ `/root/alastria/data/geth/nodekey`: This file contains the cryptographic information for joying the network. This file can be restored to start over a new instalation without restarting the permissioning  process.
+>+ ` /root/alastria/data/keystore/`: This directory contains local accounts created from the node.
 
 ## Resetting DLT
 
@@ -216,7 +217,7 @@ Some parametres are high hardcored in this installer, but can be change:
 
 * Working directory: The install procedure expect use of `/root/alastria/data` as the main directory.
 * Geth / Go versions: Changing the `alastria-node/Dockerfile` its easy to change the build version.
-> NOTE: Using 20.10 its still experimental, as described in [UPGRADE_TO_LAST_VERSION](https://github.com/alastria/alastria-node/blob/testnet2/UPGRADE_TO_LAST_VERSION.md) but should be available soon. 
+> NOTE: Using 20.10 its still experimental, as described in [UPGRADE_TO_LAST_VERSION](https://github.com/alastria/alastria-node/blob/testnet2/UPGRADE_TO_LAST_VERSION.md) but should be available soon.
 
 * Data directory: Because of the size that the DLT database can reach, a Docker volume has been deployed to set the storage on some independent path from the one set by the Docker installation. This parameter is set in `docker-compose.yml`, in _volumes_ tag.
 * Geth parametres: Other geth options can be personalized in `geth.node.bootnode.sh`, `geth.node.general.sh` or `geth.node.validator.sh`.
@@ -225,9 +226,9 @@ Some parametres are high hardcored in this installer, but can be change:
 
 These variables should be use for any script in:
 
-* `NODE_TYPE=[general|boot|validator]`: Rol for your node in the network
-* `NODE_NAME=REG_ExampleOrg_T_2_8_00`: Name for your node
-* `NODE_BRANCH=main`: Used for future improvements
+* `NODE_TYPE=[general|boot|validator]`: Rol for your node in the network.
+* `NODE_NAME=REG_ExampleOrg_T_2_8_00`: Name for your node.
+* `NODE_BRANCH=main`: Used for future improvements.
 
 ## Istanbul Gobernance IBTF
 
@@ -243,12 +244,17 @@ The validator nodes must focus on operating the consensus protocol, integrating 
 NODE_ARGS=" --rpc --rpcaddr 127.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul --rpcport 22000"
 ```
 
+Also websockets connection its allowed:
+```console
+NODE_ARGS=" --ws --wsaddr 127.0.0.0 --wsport 22001 --wsorigins source.com"
+```
+
 ### Application Ports ###
 To use your node through web3 applications, some connection method must be enabled. In this case, the following connection methods are offered:
 
 * JSON / RPC connection: you should upgrade the following files, in order to allow web3 connections; `docker-compose.yml` allow new connection from tcp/22000, or the one defined in `alastria-node-data/env/geth.common.sh` related to _RCP_ connections.
-> NOTE: exposing this port should be controled by any kind of firewall, or using any proxy filtering, as proposed in [alastria-access-point](https://github.com/alastria/alastria-access-point) proyect
-* WebSockets connection: please, follow this article [Connecting to an Alastria-T Network node using WebSockets](https://tech.tribalyte.eu/blog-websockets-red-t-alastria) created by Ronny Demera, from Tribalyte
+> NOTE: exposing this port should be controled by any kind of firewall, or using any proxy filtering, as proposed in [alastria-access-point](https://github.com/alastria/alastria-access-point) proyect.
+* WebSockets connection: please, follow this article [Connecting to an Alastria-T Network node using WebSockets](https://tech.tribalyte.eu/blog-websockets-red-t-alastria) created by Ronny Demera, from Tribalyte.
 
 ## Parameters for Boot Nodes
 
@@ -274,8 +280,8 @@ The validator nodes should not be used in any case to operate directly with it t
 $ geth attach alastria/data/geth.ipc
 > istanbul.getValidators() 
 [...]
-> istanbul.propose("_coinbase_of_node_validator_", true) #adding Validator node
-> istanbul.propose("_coinbase_of_node_validator_", false) #
+> istanbul.propose("_coinbase_of_node_validator_", true) #adding validator node
+> istanbul.propose("_coinbase_of_node_validator_", false) #put out validator node
 ```
 
 ### geth parametres for validator nodes
@@ -313,7 +319,7 @@ The following developments are in place or in backlog. Any help/volunteers are w
 # Help Resources
 
 Please, use Github to contribute and collaborate on open issues that are in development on Alastria Github platform.
-Do not hesitate to contact Alastria Support Team to solve any doubt in support@alastria.io
+Do not hesitate to contact Alastria Support Team to solve any doubt in support@alastria.io.
 
 * [Slack](https://github.com/alastria/alastria-node/wiki/HELP)
 * [Github (use & governance)](https://github.com/alastria/alastria-node/wiki/HELP)
