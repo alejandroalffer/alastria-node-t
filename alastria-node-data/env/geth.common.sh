@@ -23,25 +23,12 @@ VMODULE="consensus/istanbul/core/core.go=5"
 # CONSIDER EDITING FROM HERE
 ################################################
 
-# Enable the JSON-RPC server, setting this to "--rpc"
-ENABLE_RPC="--rpc"
-# The JSON-RPC network listening address. Only allow local calls
-RPCADDR="127.0.0.0"
-# The port to use for JSONRPC
-RPCPORT="22000"
-# Allowed protocols via JSON-RPC
-RPCAPI="admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul"
-
 # Geth arguments
 GLOBAL_ARGS="--networkid $NETID \
 --identity $NODE_NAME \
 --permissioned \
 --cache $CACHE \
 --port $P2P_PORT \
-$ENABLE_RPC \
---rpcaddr $RPCADDR \
---rpcapi $RPCAPI \
---rpcport $RPCPORT \
 --istanbul.requesttimeout $ISTANBUL_REQUESTTIMEOUT \
 --verbosity $VERBOSITY \
 --emitcheckpoints \

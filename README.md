@@ -3,9 +3,13 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/alastria/alastria-node/blob/testnet2/LICENSE)
 [![Slack Status](https://img.shields.io/badge/slack-join_chat-white.svg?logo=slack)](https://alastria.slack.com/)
 
-Based on the Jesús Ruiz develop, [RedTValidatorNode](https://github.com/hesusruiz/RedTValidatorNode)
+Based on the work of:
+* Jesús Ruiz, https://github.com/hesusruiz
+* Marcos Serradilla Diez, https://github.com/marcosio 
+* Alfonso de la Rocha, https://github.com/adlrocha
+* ... and many other contributors to the Alastria ecosystem
 
-## Configuration & Installation: Quick Guide
+## Configuration & Installation: Quick Guide for docker-compose
 
 * Clone or download this repository to the machine where you want to install and operate the Red T node and enter into the cloned directory.
 
@@ -63,7 +67,7 @@ $ curl https://ifconfig.me/
     >+ **YOUR_ENODE** is the value of the ENODE_ADDRESS file
     >+ **YOUR_IP** is the external IP of your node
 
-* With that value, create a pull request to request permission, adding the line to the node list.
+* With that value, create a pull request to request permission, adding the line to the node list. You can access to this Alastria form, https://portal.r2docuo.com/alastria/forms/noderequest, to perform administrative permision.
 
 * When the pull request is accepted, you will see that your node starts connecting to its peers and starts synchronizing the blockchain. The process of synchronization can take hours or even one or two days depending on the speed of your network and machine.
 ## Maintaining Node
@@ -117,18 +121,28 @@ at block: 60568501 (Mon, 25 Jan 2021 21:37:51 UTC)
  datadir: /root/alastria/data
  modules: admin:1.0 debug:1.0 eth:1.0 istanbul:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
 
-> eth.blockNumber
 > admin.peers
 > admin.nodeInfo
-> personal.unlockAccount(eth.accounts[0],"_your_eth0_password_",2000)
-> eth.sendTransaction({from: eth.accounts[0], to: eth.accounts[0], value:0 })
+> eth.blockNumber
 > eth.syncing
 > eth.mining
 ```
 
+An easy way to test that your node is operating normally is to generate a fund transfer transaction from the node's account, itself from 0 weis.
+
+```console
+> personal.unlockAccount(eth.accounts[0],"_your_eth0_password_",2000)
+> Unlock account 0x1234...
+Passphrase:
+true
+> eth.sendTransaction({from: eth.accounts[0], to: eth.accounts[0], value:0 })
+"0x1234..."
+```
+
+If the transaccion apears in [Alastria T-Network explorer](https://blkexplorer1.telsius.alastria.io/blocks), the node its working correctly.
 ## Backup
 
-TBD
+The following files should be 
 
 ## System requirements
 
@@ -169,7 +183,28 @@ Some parametres are high hardcored in this installer, but can be change:
 
 * Data directory: Because of the size that the network-T database can reach, a Docker volume has been deployed to set the storage on some independent path from the one set by the Docker installation. This parameter is set in `docker-compose.yml`, in _volumes_ tag.
 * Geth parametres: Other geth options can be personalized in `geth.node.bootnode.sh`, `geth.node.general.sh` or `geth.node.validator.sh`.
-## Optional parametres
+
+### Enviroment Variables
+
+These variables should be use for any script in:
+
+* `NODE_TYPE=[general|boot|validator]`: Rol for your node in the network
+* `NODE_NAME=REG_ExampleOrg_T_2_8_00`: Name for your node
+* `NODE_BRANCH=main`: Used for future improvements
+
+## Istanbul Gobernance IBTF
+
+As the T-network is using the Istanbul BFT consensus protocol, the way to generate new blocks in the test-net is to have validator nodes available in the network and integrate them into the set of nodes that are part of the validation round.
+
+Each round is initiated by a different node that "proposes" a set of transactions in a block and distributes them to the rest of the nodes.
+
+The validator nodes must focus on operating the consensus protocol, integrating the transactions in the blockchain and distributing them to the rest of the nodes. 
+
+## Parameters for Regular/General Nodes
+
+```console
+NODE_ARGS=" --rpc --rpcaddr 127.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul --rpcport 22000"
+```
 
 ### Application Ports ###
 To use your node through web3 applications, some connection method must be enabled. In this case, the following connection methods are offered:
@@ -178,17 +213,39 @@ To use your node through web3 applications, some connection method must be enabl
 > NOTE: exposing this port should be controled by any kind of firewall, or using any proxy filtering, as proposed in [alastria-access-point](https://github.com/alastria/alastria-access-point) proyect
 * WebSockets connection: please, follow this article [Connecting to an Alastria's Red T node using WebSockets](https://tech.tribalyte.eu/blog-websockets-red-t-alastria) created by Ronny Demera, from Tribalyte
 
-## Istanbul Gobernance IBTF
-
-TBD
-
 ## Parameters for Boot Nodes
 
-TBD
+Boot nodes are responsible for permitting the nodes in the network. They are visible to all types of nodes. The boot node should not be used in any case to operate directly with it to interact with the network, so `rcp/ws` ports are not allowed.
+
+### geth parametres for boot nodes
+
+```console
+NODE_ARGS="--maxpeers 200"
+```
 
 ## Parameters for Validator Nodes
 
-TBD
+The validator nodes should not be used in any case to operate directly with it to interact with the network, so `rcp/ws` ports are not allowed.
+
+* `istanbul.getValidators` () retrieves the list of validators that make up the validation round.
+
+* `istanbul.propose ("0x ...", true)` votes for the validator represented by the coinbase to be integrated into the validation round. It must be accepted by at least half of the nodes.
+
+* `istanbul.propose ("0x ...", false)` votes for the validator represented by the coinbase to be excluded from the validation round. It must be rejected by at least half of the nodes. 
+
+```console
+$ geth attach alastria/data/geth.ipc
+> istanbul.getValidators() 
+[...]
+> istanbul.propose("_coinbase_of_node_validator_", true) #adding Validator node
+> istanbul.propose("_coinbase_of_node_validator_", false) #
+```
+
+### geth parametres for validator nodes
+
+```console
+NODE_ARGS=" --maxpeers 100 --mine --minerthreads $(grep -c "processor" /proc/cpuinfo)"
+```
 
 ## Other Resources
 
