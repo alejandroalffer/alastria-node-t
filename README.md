@@ -11,7 +11,7 @@ Based on the work of:
 
 ## Configuration & Installation: Quick Guide for docker-compose
 
-In Alastria T-network there are 3 types of nodes.
+In Alastria-T network there are 3 types of nodes.
 
 * Validators: They are in charge of the mining and validation of the blocks using the IBFT consensus algorithm.
 * Bootnodes: They are responsible for the permission of the nodes in the network.
@@ -24,7 +24,6 @@ The following process explain the instalation for a Regular (also called _genera
 * Edit the file `.env` and modify the lines with:
 
     + NODE_TYPE if your not sure what option its need, select _general_
-
     + NODE_NAME attribute according to the name you want for this node. The name SHOULD follow the convention:
 
     > `TYPE_COMPANY_T_Y_Z_NN`
@@ -164,7 +163,7 @@ true
 "0x1234..."
 ```
 
-If the transaction appears in [Alastria T-Network explorer](https://blkexplorer1.telsius.alastria.io/blocks), the node its working correctly.
+If the transaction appears in [Alastria-T Network explorer](https://blkexplorer1.telsius.alastria.io/blocks), the node its working correctly.
 ## Backup
 
 The following items should be backed up:
@@ -194,14 +193,14 @@ DLT database grows 1Gb/week: keep in mind for future updates. SSD disc its also 
 
 ## System ports (INPUT)
 
-The following ports must be open, at least, to the nodes defined in the `/root/alastria/data/static-nodes.json` and `/root/alastria/data/permissioned-nodes.json` files. We recommend that these ports be universally open: the wishper protocol defined in geth / GoQuorum is robust enough to be published without the need for control through the firewall.
+The following ports must be open, at least, to the nodes defined in the `/root/alastria/data/static-nodes.json` and `/root/alastria/data/permissioned-nodes.json` files. We recommend that these ports be universally open: the `whisper protocol` defined in `geth`/`GoQuorum` is robust enough to be published without the need for control through the firewall.
 
 | Port | Type | Definition |
 |:------:|:-----:|:---------- |
 | 21000| TCP/UDP | Geth process application port (inbound and outbound for ethereum traffic) |
 | 53 | TCP/UDP | Access to external Internet based resolvers |
 
-`tcp/21000` and `udp/21000`port are mandatory, as is the common standard for the Red-T network.
+`tcp/21000` and `udp/21000`port are mandatory, as is the common standard for the Alastria-T Network.
 ## System ports (OUTPUT)
 
 We strongly advise not to filter outgoing ports. If necessary, these are the destinations
@@ -219,7 +218,7 @@ Some parametres are high hardcored in this installer, but can be change:
 * Geth / Go versions: Changing the `alastria-node/Dockerfile` its easy to change the build version.
 > NOTE: Using 20.10 its still experimental, as described in [UPGRADE_TO_LAST_VERSION](https://github.com/alastria/alastria-node/blob/testnet2/UPGRADE_TO_LAST_VERSION.md) but should be available soon. 
 
-* Data directory: Because of the size that the network-T database can reach, a Docker volume has been deployed to set the storage on some independent path from the one set by the Docker installation. This parameter is set in `docker-compose.yml`, in _volumes_ tag.
+* Data directory: Because of the size that the DLT database can reach, a Docker volume has been deployed to set the storage on some independent path from the one set by the Docker installation. This parameter is set in `docker-compose.yml`, in _volumes_ tag.
 * Geth parametres: Other geth options can be personalized in `geth.node.bootnode.sh`, `geth.node.general.sh` or `geth.node.validator.sh`.
 
 ### Enviroment Variables
@@ -249,7 +248,7 @@ To use your node through web3 applications, some connection method must be enabl
 
 * JSON / RPC connection: you should upgrade the following files, in order to allow web3 connections; `docker-compose.yml` allow new connection from tcp/22000, or the one defined in `alastria-node-data/env/geth.common.sh` related to _RCP_ connections.
 > NOTE: exposing this port should be controled by any kind of firewall, or using any proxy filtering, as proposed in [alastria-access-point](https://github.com/alastria/alastria-access-point) proyect
-* WebSockets connection: please, follow this article [Connecting to an Alastria's Red T node using WebSockets](https://tech.tribalyte.eu/blog-websockets-red-t-alastria) created by Ronny Demera, from Tribalyte
+* WebSockets connection: please, follow this article [Connecting to an Alastria-T Network node using WebSockets](https://tech.tribalyte.eu/blog-websockets-red-t-alastria) created by Ronny Demera, from Tribalyte
 
 ## Parameters for Boot Nodes
 

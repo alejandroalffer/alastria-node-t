@@ -1,5 +1,5 @@
 ################################################
-# PRODUCTION ALASTRIA NODE BUILDER
+# ALASTRIA NODE BUILDER
 ################################################
 
 FROM ubuntu:18.04 AS builder
@@ -50,7 +50,7 @@ RUN git clone https://github.com/ConsenSys/quorum.git \
     && cd /root
 
 ################################################
-# PRODUCTION ALASTRIA NODE
+# ALASTRIA NODE
 ################################################
 
 FROM ubuntu:18.04 AS production

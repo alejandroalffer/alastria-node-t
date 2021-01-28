@@ -31,12 +31,16 @@ if [ "$1" = 'start' ]; then
 
         # Download the genesis block from the Alastria node repository
         echo "INFO [00-00|00:00:00.000|entrypoint.sh:${LINENO}] Generating genesis.json and initialize structure..."
+        
         wget -q -O /root/genesis.json https://raw.githubusercontent.com/alastria/alastria-node/testnet2/data/genesis.json
+        
         echo "INFO [00-00|00:00:00.000|entrypoint.sh:${LINENO}] ... Storage initialized"
         
         # Initialize the Blockchain structure
         echo "INFO [00-00|00:00:00.000|entrypoint.sh:${LINENO}] Initialize the Blockchain with the genesis block"
+        
         geth --datadir /root/alastria/data init /root/genesis.json
+        
         echo "INFO [00-00|00:00:00.000|entrypoint.sh:${LINENO}] ... Blockchain initialized"
         
         # Signal that the initialization process has been performed
