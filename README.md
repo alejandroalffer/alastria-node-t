@@ -55,7 +55,7 @@ $ docker-compose logs -f --tail=20
 
 You should see the node initializing and starting to try to contact peers. However, the node is not yet permissioned, so it can not participate in the blockchain network yet.
 
-All nodes that will be installed in the Alastria Networks must be permissioned. To ask for permission you must enter your data in this [electonic form](https://portal.r2docuo.com/alastria/forms/noderequest) and make a PR for the files that are modified in the installation process. If an associated will want to remove a node from the network, it is kindly appreciated that a a request must be notified through a PR. Other guides related with operation of Alastria Node are aviable in following documents:
+All nodes that will be installed in the Alastria Networks must be permissioned. To ask for permission you must enter your data in this [electronic form](https://portal.r2docuo.com/alastria/forms/noderequest) and make a PR for the files that are modified in the installation process. If an associated will want to remove a node from the network, it is kindly appreciated that a a request must be notified through a PR. Other guides related with operation of Alastria Node are aviable in following documents:
 
 * [Alastria-T Network Operation and Government Policies (en_GB)](https://alastria.io/wp-content/uploads/2020/04/POLI-TICAS-GOBIERNO-Y-OPERACIO-N-RED-ALASTRIA-V1.01-DEF-en-GB.pdf)
 * [Alastria-T Network Operation and Government Policies (es_ES)](https://alastria.io/wp-content/uploads/2020/04/POLI-TICAS-GOBIERNO-Y-OPERACIO-N-RED-ALASTRIA-V1.01-DEF.pdf)
@@ -252,7 +252,7 @@ Each round is initiated by a different node that "proposes" a set of transaction
 
 The validator nodes must focus on operating the consensus protocol, integrating the transactions in the blockchain and distributing them to the rest of the nodes. 
 
-## Parameters for Regular/General Nodes
+## Regular/General Nodes
 
 ```console
 NODE_ARGS=" --rpc --rpcaddr 127.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul --rpcport 22000"
@@ -270,7 +270,7 @@ To use your node through web3 applications, some connection method must be enabl
 > NOTE: exposing this port should be controled by any kind of firewall, or using any proxy filtering, as proposed in [alastria-access-point](https://github.com/alastria/alastria-access-point) proyect.
 * WebSockets connection: please, follow this article [Connecting to an Alastria-T Network node using WebSockets](https://tech.tribalyte.eu/blog-websockets-red-t-alastria) created by Ronny Demera, from Tribalyte.
 
-## Parameters for Boot Nodes
+## Boot Nodes
 
 Boot nodes are responsible for permitting the nodes in the network. They are visible to all types of nodes. The boot node should not be used in any case to operate directly with it to interact with the network, so `rcp/ws` ports are not allowed.
 
@@ -280,7 +280,7 @@ Boot nodes are responsible for permitting the nodes in the network. They are vis
 NODE_ARGS="--maxpeers 200"
 ```
 
-## Parameters for Validator Nodes
+## Validator Nodes
 
 The validator nodes should not be used in any case to operate directly with it to interact with the network, so `rcp/ws` ports are not allowed.
 
