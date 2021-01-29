@@ -9,6 +9,7 @@ Based on the work of:
 * Alfonso de la Rocha, https://github.com/adlrocha
 * ... and many other contributors to the Alastria ecosystem
 
+
 Alastria-T Network is a `GoQuorum` network that uses the IBFT consensus algorithm 
 ## Configuration & Installation: Quick Guide for docker-compose
 
@@ -53,6 +54,17 @@ $ docker-compose logs -f --tail=20
 ## Performing permissioned
 
 You should see the node initializing and starting to try to contact peers. However, the node is not yet permissioned, so it can not participate in the blockchain network yet.
+
+All nodes that will be installed in the Alastria Networks must be permissioned. To ask for permission you must enter your data in this [electonic form](https://portal.r2docuo.com/alastria/forms/noderequest) and make a PR for the files that are modified in the installation process. If an associated will want to remove a node from the network, it is kindly appreciated that a a request must be notified through a PR. Other guides related with operation of Alastria Node are aviable in following documents:
+
+* [Alastria-T Network Operation and Government Policies (en_GB)](https://alastria.io/wp-content/uploads/2020/04/POLI-TICAS-GOBIERNO-Y-OPERACIO-N-RED-ALASTRIA-V1.01-DEF-en-GB.pdf)
+* [Alastria-T Network Operation and Government Policies (es_ES)](https://alastria.io/wp-content/uploads/2020/04/POLI-TICAS-GOBIERNO-Y-OPERACIO-N-RED-ALASTRIA-V1.01-DEF.pdf)
+
+* [Conditions of operation of the Alastria-T Network Regular Nodes (en_GB)](https://alastria.io/wp-content/uploads/2020/06/CONDICIONES-USO-RED-NODOS-REGULARES-A-LA-RED-ALASTRIA-v1.1-DEF-en-GB.pdf)
+* [Conditions of operation of the Alastria-T Network Regular Nodes (es_ES)](https://alastria.io/wp-content/uploads/2020/06/CONDICIONES-USO-RED-NODOS-REGULARES-A-LA-RED-ALASTRIA-v1.1-DEF.pdf)
+
+* [Conditions of operation of the Alastria-T Network Critical (boot && validator) Nodes (en_GB)](https://alastria.io/wp-content/uploads/2020/06/CONDICIONES-OPERACIO-N-RED-T-POR-PARTE-DE-NODOS-CRI-TICOS-V1.1-DEF-en-GB.pdf)
+* [Conditions of operation of the Alastria-T Network Critical (boot && validator) Nodes (es_ES)](https://alastria.io/wp-content/uploads/2020/06/CONDICIONES-OPERACIO%CC%81N-RED-T-POR-PARTE-DE-NODOS-CRI%CC%81TICOS-V1.1-DEF.pdf)
 
 In order to perform permissioning, follow these steps:
 
