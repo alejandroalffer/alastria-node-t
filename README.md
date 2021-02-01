@@ -45,7 +45,7 @@ This is the name that will appear in the public listings of nodes of the network
 $ docker-compose up -d
 ```
 
-* The command runs the service in the background, and you can check its activity by running:
+* The command runs the service in the background, and you can check it`'s activity by running:
 
 ```console
 $ docker-compose logs -f --tail=20
@@ -178,7 +178,7 @@ true
 "0x1234..."
 ```
 
-If the transaction appears in [Alastria-T Network explorer](https://blkexplorer1.telsius.alastria.io/blocks), the node its working correctly.
+If the transaction appears in [Alastria-T Network explorer](https://blkexplorer1.telsius.alastria.io/blocks), the node it's working correctly.
 ## Backup
 
 The following items should be backed up:
@@ -204,7 +204,7 @@ $ (restart-container)
 | Memory | 4Gb |  8Gb |
 | Hard Disk | 128 Gb |  256 Gb |
 
-DLT database grows 1Gb/week: keep in mind for future updates. SSD disc its also mandatory.
+DLT database grows 1Gb/week: keep in mind for future updates. SSD disc it's also mandatory.
 
 ## System ports (INPUT)
 
@@ -230,8 +230,8 @@ We strongly advise not to filter outgoing ports. If necessary, these are the des
 Some parametres are high hardcored in this installer, but can be change:
 
 * Working directory: The install procedure expect use of `/root/alastria/data` as the main directory.
-* Geth / Go versions: Changing the `alastria-node/Dockerfile` its easy to change the build version.
-> NOTE: Using 20.10 its still experimental, as described in [UPGRADE_TO_LAST_VERSION](https://github.com/alastria/alastria-node/blob/testnet2/UPGRADE_TO_LAST_VERSION.md) but should be available soon.
+* Geth / Go versions: Changing the `alastria-node/Dockerfile` it's easy to change the build version.
+> NOTE: Using 20.10 it's still experimental, as described in [UPGRADE_TO_LAST_VERSION](https://github.com/alastria/alastria-node/blob/testnet2/UPGRADE_TO_LAST_VERSION.md) but should be available soon.
 
 * Data directory: Because of the size that the DLT database can reach, a Docker volume has been deployed to set the storage on some independent path from the one set by the Docker installation. This parameter is set in `docker-compose.yml`, in _volumes_ tag.
 * Geth parametres: Other geth options can be personalized in `geth.node.bootnode.sh`, `geth.node.general.sh` or `geth.node.validator.sh`.
@@ -258,7 +258,7 @@ The validator nodes must focus on operating the consensus protocol, integrating 
 NODE_ARGS=" --rpc --rpcaddr 127.0.0.0 --rpcapi admin,db,eth,debug,miner,net,shh,txpool,personal,web3,quorum,istanbul --rpcport 22000"
 ```
 
-Also websockets connection its allowed:
+Also websockets connection is allowed:
 ```console
 NODE_ARGS=" --ws --wsaddr 127.0.0.0 --wsport 22001 --wsorigins source.com"
 ```
@@ -289,6 +289,8 @@ The validator nodes should not be used in any case to operate directly with it t
 * `istanbul.propose ("0x ...", true)` votes for the validator represented by the coinbase to be integrated into the validation round. It must be accepted by at least half of the nodes.
 
 * `istanbul.propose ("0x ...", false)` votes for the validator represented by the coinbase to be excluded from the validation round. It must be rejected by at least half of the nodes. 
+
+* `istanbul.getSnapshot()` get current status for changes in validator nodes.
 
 ```console
 $ geth attach alastria/data/geth.ipc
@@ -342,5 +344,5 @@ Do not hesitate to contact Alastria Support Team to solve any doubt in support@a
 
 * Use of constellation it's no longer supported. Previous documentation can be accesed in [Constellation Using Pivate Transactions in Alastria T](https://github.com/alastria/alastria-node/wiki/Constellation---Using-Pivate-Transactions-in-Alastria-T)
 * Use of nginx as proxy it's no longer supported. However, the repository alastria-node-access it's still avaiable
-* Use of `monitor` its deprecated
+* Use of `monitor` is deprecated
 * Use of local fork of `quorum`, https://github.com/alastria/quorum it's no longer used
