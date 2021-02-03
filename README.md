@@ -7,10 +7,10 @@ Based on the work of:
 * Jesús Ruiz, https://github.com/hesusruiz.
 * Marcos Serradilla, https://github.com/marcosio.
 * Alfonso de la Rocha, https://github.com/adlrocha.
-* ... and many other contributors to the Alastria ecosystem, :raised_hands:
+* ... and many other contributors to the Alastria ecosystem, :raised_hands: :raised_hands: :raised_hands:
 
 
-Alastria-T Network is a [GoQuorum](https://github.com/ConsenSys/quorum) network that uses the IBFT consensus algorithm.
+Alastria-T Network is a [GoQuorum](https://github.com/ConsenSys/quorum) public-permissioned network that uses the IBFT consensus algorithm.
 ## Configuration & Installation: Quick Guide for [docker-compose](https://docs.docker.com/compose/)
 
 In Alastria-T Network there are 3 types of nodes.
@@ -30,7 +30,7 @@ The following process explain the installation for a Regular (also called _gener
 
 > `TYPE_COMPANY_T_Y_Z_NN`
 
-Where _TYPE_ is the rol for the node in the network (use `REG` for regular/general nodes), _XX_ is your company/entity name, Y is the number of processors of the machine, Z is the amount of memory in Gb and NN is a sequential counter for each machine that you may have (starting at 00). For example:
+Where _TYPE_ is the rol for the node in the network (use `REG` for regular/general nodes), _XX_ is your company/entity name, _Y_ is the number of processors of the machine, _Z_ is the amount of memory in Gb and _NN_ is a sequential counter for each machine that you may have (starting at 00). For example:
 
 >+ `NODE_NAME="REG_IN2_T_2_8_00"`
 >+ `NODE_NAME="REG_DigitelTS_T_2_8_00"`
@@ -90,15 +90,14 @@ $ curl https://ifconfig.me/
  >+ **YOUR_ENODE** is the value of the ENODE_ADDRESS file
  >+ **YOUR_IP** is the external IP of your node
 
-* With that value, create a pull request to request permission, adding the line to the node list. You can access to this Alastria form, https://portal.r2docuo.com/alastria/forms/noderequest, to perform administrative permission:
-
+* With that value, create a pull request to request permission, adding the line to the node list. You can access to this Alastria form, https://portal.r2docuo.com/alastria/forms/noderequest, to perform administrative permission.
 
 The corresponding repository is alastria-node and the branch will be testnet2.
 
 The files to be modified will be:
 
->+ `DIRECTORY_REGULAR.md`: you should include your node name, and the `enode` and `IP` direction.
->+ `data/regular-nodes.json`: you should include the enode and IP direction.
+>+ `DIRECTORY_REGULAR.md`: you should include your `node name`, and the `enode` and `IP` direction.
+>+ `data/regular-nodes.json`: you should include the `enode` and IP `direction` and `port` for p2p communications (21000).
 
 * When the pull request is accepted, you will see that your node starts connecting to its peers and starts synchronizing the blockchain. The process of synchronization can take hours or even one or two days depending on the speed of your network and machine.
 
