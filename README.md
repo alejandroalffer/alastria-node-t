@@ -11,7 +11,7 @@ Based on the work of:
 
 
 Alastria-T Network is a [GoQuorum](https://github.com/ConsenSys/quorum) public-permissioned network that uses the IBFT consensus algorithm.
-## Configuration & Installation: Quick Guide for [docker-compose](https://docs.docker.com/compose/)
+# Configuration & Installation: Quick Guide for [docker-compose](https://docs.docker.com/compose/)
 
 In Alastria-T Network there are 3 types of nodes.
 
@@ -26,9 +26,7 @@ The following process explain the installation for a Regular (also called _gener
 * :fire: Edit the `.env`  file and modify the lines with:
 
 >+ NODE_TYPE if your not sure what option its need, select _general_
->+ NODE_NAME attribute according to the name you want for this node. The name SHOULD follow the convention:
-
-> `TYPE_COMPANY_T_Y_Z_NN`
+>+ NODE_NAME attribute according to the name you want for this node. The name SHOULD follow the convention: `TYPE_COMPANY_T_Y_Z_NN`
 
 Where _TYPE_ is the rol for the node in the network (use `REG` for regular/general nodes), _XX_ is your company/entity name, _Y_ is the number of processors of the machine, _Z_ is the amount of memory in Gb and _NN_ is a sequential counter for each machine that you may have (starting at 00). For example:
 
@@ -52,7 +50,7 @@ $ docker-compose logs -f --tail=20
 ```
   * **You're done!** :sunglasses: :dancer: :v: :beers:
   
-## Performing permissioned
+# Performing permissioned
 
 You should see the node initializing and starting to try to contact peers. However, the node is not yet permissioned, so it can not participate in the blockchain network yet.
 
@@ -105,7 +103,9 @@ Now it's time to start knowing more about `GoQuorum`:
 * https://geth.ethereum.org/docs/interface/command-line-options
 * https://docs.goquorum.consensys.net/en/stable/
 * https://github.com/ConsenSys/quorum 
-## Node maintenance
+# Regular Node
+
+### Maintenance
 
 You can use the standard docker-compose commands to manage your node. For example:
 
@@ -236,7 +236,7 @@ Some parameters are high hardcored in this installer, but can be change:
 * Data directory: Because of the size that the DLT database can reach, a Docker volume has been deployed to set the storage on some independent path from the one set by the Docker installation. This parameter is set in `docker-compose.yml`, in _volumes_ tag.
 * Geth parameters: Other geth options can be personalized in `geth.node.bootnode.sh`, `geth.node.general.sh` or `geth.node.validator.sh`.
 
-### Environment Variables
+## Environment Variables
 
 These variables should be use for any script in:
 
@@ -265,24 +265,24 @@ NODE_ARGS=" --ws --wsaddr 127.0.0.0 --wsport 22001 --wsorigins source.com"
 
 > NOTE: use of [GraphQL](https://docs.goquorum.consensys.net/en/stable/HowTo/Use/graphql/) will be available soon.
 
-### Application Ports ###
+## Application Ports
 To use your node through web3 applications, some connection method must be enabled. In this case, the following connection methods are offered:
 
 * JSON-RPC connection: you should upgrade the following files, in order to allow `Web3.JS` or `EtherJS` connections; `docker-compose.yml` allow new connection from `tcp/22000`, or the one defined in `alastria-node-data/env/geth.common.sh` related to `JSON-RPC` connections.
 > NOTE: exposing this port should be controled by any kind of firewall, or using any proxy filtering, as proposed in [alastria-access-point](https://github.com/alastria/alastria-access-point) project.
 * WebSockets connection: please, follow this article [Connecting to an Alastria-T Network node using WebSockets](https://tech.tribalyte.eu/blog-websockets-red-t-alastria) created by Ronny Demera, from Tribalyte.
 
-## Boot Nodes
+# Boot Nodes
 
 Boot nodes are responsible for permitting the nodes in the network. They are visible to all types of nodes. The boot node should not be used in any case to operate directly with it to interact with the network, so only `IPC` ports are allowed.
 
-### geth args for boot nodes
+## geth args for boot nodes
 
 ```console
 NODE_ARGS="--maxpeers 200"
 ```
 
-## Validator Nodes
+# Validator Nodes
 
 The validator nodes should not be used in any case to operate directly with it to interact with the network, so nor `JSON-RPC` nor `WebSockets` ports are not allowed.
 
@@ -302,13 +302,13 @@ $ geth attach alastria/data/geth.ipc
 > istanbul.propose("_coinbase_of_node_validator_", false) #remove validator node
 ```
 
-### geth args for validator nodes
+## geth args for validator nodes
 
 ```console
 NODE_ARGS=" --maxpeers 100 --mine --minerthreads $(grep -c "processor" /proc/cpuinfo)"
 ```
 
-## Other Resources
+# Other Resources
 
 + [Wiki](https://github.com/alastria/alastria-node/wiki)
 + [FAQ ES](https://github.com/alastria/alastria-node/wiki/FAQ_ES)
@@ -327,7 +327,8 @@ NODE_ARGS=" --maxpeers 100 --mine --minerthreads $(grep -c "processor" /proc/cpu
 
 The following developments are in place or in backlog. Any help/volunteers are welcomed:
 
-* Upgrade to the new EVM and the new GoQuorum version. `WIP`
+* Create `Ansible`, `Swarm`, `Makefile`, `Chef`,... recipes in order to performing `node` installs.
+* Upgrade to the new EVM and the new GoQuorum version. `WIP` :fire::fire::fire:
 * Netstats improvements, to allow this tool to handle a very big number of nodes.
 * Validator nodes automatic round, to allow the network to make automatic change of the validator nodes without intervention of the humans administrators, in case of any fault/malfunctioning of the nodes.
 * HardFork to upgrade Geth binary to prepare for Gas implementation Faucet or Gas Distributor.
