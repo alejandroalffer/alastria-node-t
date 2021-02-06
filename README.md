@@ -7,10 +7,12 @@ Based on the work of:
 * Jesús Ruiz, https://github.com/hesusruiz.
 * Marcos Serradilla, https://github.com/marcosio.
 * Alfonso de la Rocha, https://github.com/adlrocha.
-* ... and many other contributors to the Alastria ecosystem, :raised_hands: :raised_hands: :raised_hands:
+* ... and many other contributors to the [Alastria](https://alastria.io/en/)  ecosystem, :raised_hands: :raised_hands: :raised_hands:
 
+Alastria-T Network is a [GoQuorum](https://github.com/ConsenSys/quorum) public-permissioned network that uses the [IBFT](https://docs.goquorum.consensys.net/en/stable/Concepts/Consensus/IBFT/) consensus algorithm, and it's managed by [Alastria](https://alastria.io/en/) partners.
 
-Alastria-T Network is a [GoQuorum](https://github.com/ConsenSys/quorum) public-permissioned network that uses the IBFT consensus algorithm.
+[GoQuorum](https://github.com/ConsenSys/quorum) it's a fork of [Geth](https://geth.ethereum.org/) (the Official Go implementation of the Ethereum protocol) ownership by [Consensys](https://consensys.net/) that implements [Raft](https://docs.goquorum.consensys.net/en/stable/Concepts/Consensus/Raft/) and [IBFT](https://docs.goquorum.consensys.net/en/stable/Concepts/Consensus/IBFT/) consensus algorithm, and is licensed under the
+[GNU Lesser General Public License v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html)
 # Configuration & Installation: Quick Guide for [docker-compose](https://docs.docker.com/compose/)
 
 In Alastria-T Network there are 3 types of nodes.
@@ -157,6 +159,7 @@ Repeat passphrase:
 > eth.blockNumber
 > eth.syncing
 > eth.mining
+> eth.coinbase
 ```
 
 An easy way to test that your node is operating normally is to generate a fund transfer transaction from the node's account, itself from 0 weis.
@@ -230,7 +233,7 @@ Some parameters are high hardcored in this installer, but can be change:
 
 * Working directory: The install procedure expect use of `/root/alastria/data` as the main directory.
 * `GoQuorum` and `Go` versions: Changing the `alastria-node/Dockerfile` it's easy to change the build version.
-* 
+
 > NOTE: Using 20.10/21.01 version of `GoQuorum` it's still experimental, as described in [UPGRADE_TO_LAST_VERSION](https://github.com/alastria/alastria-node/blob/testnet2/UPGRADE_TO_LAST_VERSION.md) but should be available soon.
 
 * Data directory: Because of the size that the DLT database can reach, a Docker volume has been deployed to set the storage on some independent path from the one set by the Docker installation. This parameter is set in `docker-compose.yml`, in _volumes_ tag.
@@ -246,7 +249,7 @@ These variables should be use for any script in:
 
 ## Istanbul Governance IBTF
 
-As the T-network is using the Istanbul BFT consensus protocol, the way to generate new blocks in the test-net is to have validator nodes available in the network and integrate them into the set of nodes that are part of the validation round.
+As the T-network uses the Istanbul BFT consensus protocol, the way to generate new blocks in the test-net is to have validator nodes available in the network and integrate them into the set of nodes that are part of the validation round.
 
 Each round is initiated by a different node that "proposes" a set of transactions in a block and distributes them to the rest of the nodes.
 
@@ -269,7 +272,7 @@ NODE_ARGS=" --ws --wsaddr 127.0.0.0 --wsport 22001 --wsorigins source.com"
 To use your node through web3 applications, some connection method must be enabled. In this case, the following connection methods are offered:
 
 * JSON-RPC connection: you should upgrade the following files, in order to allow `Web3.JS` or `EtherJS` connections; `docker-compose.yml` allow new connection from `tcp/22000`, or the one defined in `alastria-node-data/env/geth.common.sh` related to `JSON-RPC` connections.
-> NOTE: exposing this port should be controled by any kind of firewall, or using any proxy filtering, as proposed in [alastria-access-point](https://github.com/alastria/alastria-access-point) project.
+> NOTE: exposing this port should be controlled by any kind of firewall, or using any proxy filtering, as proposed in [alastria-access-point](https://github.com/alastria/alastria-access-point) project.
 * WebSockets connection: please, follow this article [Connecting to an Alastria-T Network node using WebSockets](https://tech.tribalyte.eu/blog-websockets-red-t-alastria) created by Ronny Demera, from Tribalyte.
 
 # Boot Nodes
